@@ -10,19 +10,19 @@ set -Eeuo pipefail
 # MySQL/MariaDB is intentionally never installed by this script.
 #
 # Interactive usage:
-#   bash webstack-deploy.sh
+#   bash deploy.sh
 #
 # Non-interactive examples:
-#   DOMAIN=example.com LE_EMAIL=you@example.com INSTALL_PHP=0 bash webstack-deploy.sh
-#   DOMAIN=example.com LE_EMAIL=you@example.com INSTALL_PHP=1 bash webstack-deploy.sh
-#   DOMAIN=example.com LE_EMAIL=you@example.com INSTALL_PHP=1 PHP_VERSION=8.5 bash webstack-deploy.sh
-#   DOMAIN=example.com LE_EMAIL=you@example.com CREATE_SWAP=1 bash webstack-deploy.sh
+#   DOMAIN=example.com LE_EMAIL=you@example.com INSTALL_PHP=0 bash deploy.sh
+#   DOMAIN=example.com LE_EMAIL=you@example.com INSTALL_PHP=1 bash deploy.sh
+#   DOMAIN=example.com LE_EMAIL=you@example.com INSTALL_PHP=1 PHP_VERSION=8.5 bash deploy.sh
+#   DOMAIN=example.com LE_EMAIL=you@example.com CREATE_SWAP=1 bash deploy.sh
 #
 # Optional:
-#   WEBROOT=/var/www/example.com bash webstack-deploy.sh
-#   SWAP_SIZE=1024 SWAPFILE=/swapfile SWAPPINESS=10 bash webstack-deploy.sh
-#   REQUIRE_DNS_MATCH=1 bash webstack-deploy.sh
-#   RUN_RENEW_DRY_RUN=1 bash webstack-deploy.sh
+#   WEBROOT=/var/www/example.com bash deploy.sh
+#   SWAP_SIZE=1024 SWAPFILE=/swapfile SWAPPINESS=10 bash deploy.sh
+#   REQUIRE_DNS_MATCH=1 bash deploy.sh
+#   RUN_RENEW_DRY_RUN=1 bash deploy.sh
 #
 # After the first deployment, add more sites with:
 #   deploy
@@ -53,7 +53,7 @@ F2B_JAIL="/etc/fail2ban/jail.d/99-sshd-nginx.local"
 DEPLOY_CONFIG_DIR="/etc/webstack-deploy"
 DEPLOY_CONFIG="/etc/webstack-deploy/config"
 DEPLOY_LIB_DIR="/usr/local/lib/webstack-deploy"
-DEPLOY_SCRIPT="/usr/local/lib/webstack-deploy/webstack-deploy.sh"
+DEPLOY_SCRIPT="/usr/local/lib/webstack-deploy/deploy.sh"
 DEPLOY_COMMAND="/usr/local/bin/deploy"
 PHP_ENABLED="0"
 PHP_FPM_SERVICE=""
@@ -536,7 +536,7 @@ save_deploy_config() {
   log "保存 Let's Encrypt 邮箱和初始化设置，供 deploy 命令使用..."
   install -d -m 0755 "${DEPLOY_CONFIG_DIR}"
   {
-    printf '# Managed by webstack-deploy.sh. Used by /usr/local/bin/deploy.\n'
+    printf '# Managed by deploy.sh. Used by /usr/local/bin/deploy.\n'
     printf 'LE_EMAIL=%q\n' "${LE_EMAIL}"
     printf 'ENABLE_FAIL2BAN=%q\n' "${FAIL2BAN_ENABLED}"
   } > "${DEPLOY_CONFIG}"
@@ -608,7 +608,7 @@ collect_add_site_settings() {
 
 require_root() {
   if [[ "${EUID}" -ne 0 ]]; then
-    die "Please run this script as root, for example: bash webstack-deploy.sh"
+    die "Please run this script as root, for example: bash deploy.sh"
   fi
 }
 
