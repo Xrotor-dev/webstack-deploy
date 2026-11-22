@@ -29,13 +29,13 @@ deploy
 ## 一键运行
 
 ```bash
-wget -O webstack-deploy.sh https://raw.githubusercontent.com/ImXcopter/webstack-deploy/main/webstack-deploy.sh && chmod +x webstack-deploy.sh && bash webstack-deploy.sh
+wget -O deploy.sh https://raw.githubusercontent.com/Xrotor-dev/webstack-deploy/main/deploy.sh && chmod +x deploy.sh && bash deploy.sh
 ```
 
 如果 VPS 的 CA 证书环境过旧，可以使用：
 
 ```bash
-wget --no-check-certificate -O webstack-deploy.sh https://raw.githubusercontent.com/ImXcopter/webstack-deploy/main/webstack-deploy.sh && chmod +x webstack-deploy.sh && bash webstack-deploy.sh
+wget --no-check-certificate -O deploy.sh https://raw.githubusercontent.com/Xrotor-dev/webstack-deploy/main/deploy.sh && chmod +x deploy.sh && bash deploy.sh
 ```
 
 ## 首次初始化流程
@@ -203,25 +203,25 @@ deploy 命令：
 初始化并立即添加一个静态网站：
 
 ```bash
-DOMAIN=example.com LE_EMAIL=admin@example.com INSTALL_PHP=0 ENABLE_FAIL2BAN=1 ASSUME_YES=1 bash webstack-deploy.sh
+DOMAIN=example.com LE_EMAIL=admin@example.com INSTALL_PHP=0 ENABLE_FAIL2BAN=1 ASSUME_YES=1 bash deploy.sh
 ```
 
 初始化并立即添加一个 PHP 8.x 网站：
 
 ```bash
-DOMAIN=example.com LE_EMAIL=admin@example.com INSTALL_PHP=1 ENABLE_FAIL2BAN=1 ASSUME_YES=1 bash webstack-deploy.sh
+DOMAIN=example.com LE_EMAIL=admin@example.com INSTALL_PHP=1 ENABLE_FAIL2BAN=1 ASSUME_YES=1 bash deploy.sh
 ```
 
 指定 Swap：
 
 ```bash
-DOMAIN=example.com LE_EMAIL=admin@example.com INSTALL_PHP=1 SWAP_SIZE=1024 ASSUME_YES=1 bash webstack-deploy.sh
+DOMAIN=example.com LE_EMAIL=admin@example.com INSTALL_PHP=1 SWAP_SIZE=1024 ASSUME_YES=1 bash deploy.sh
 ```
 
 只初始化系统，不添加网站：
 
 ```bash
-LE_EMAIL=admin@example.com ADD_FIRST_SITE=0 ASSUME_YES=1 bash webstack-deploy.sh
+LE_EMAIL=admin@example.com ADD_FIRST_SITE=0 ASSUME_YES=1 bash deploy.sh
 ```
 
 ## 常用检查命令
